@@ -1,0 +1,44 @@
+1 - Criar component counter: 
+    ng g c counter
+
+2 - criar diretorio reducer
+
+3 - Criar o arquivo counter.action.ts
+    import { createAction, props } from '@ngrx/store';
+
+4 - criar o arquivo counter.state.ts
+
+5 - Criar o arquivo counter.actions.ts
+  import { createAction, props } from '@ngrx/store';
+
+  export const increment = createAction('[Counter] Increment');
+  export const decrement = createAction('[Counter] Decrement');
+  export const reset = createAction('[Counter] Reset');
+
+5 - Criar o arquivo counter.reducer.ts
+
+    import { createReducer, on } from '@ngrx/store';
+    import { increment, decrement, reset } from './counter.actions';
+
+6 - registrar reducer
+        import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+        import { environment } from '../environments/environment';
+        StoreModule.forRoot({ count: counterReducer })
+        StoreDevtoolsModule.instrument({
+            maxAge: 25, // Retains last 25 states
+            logOnly: environment.production, // Restrict extension to log-only mode
+        }),
+
+7 - dispachar as ações:
+
+    import { Store } from '@ngrx/store';
+    private store: Store<counterState>
+
+8 - criar seletor:
+
+export const selectFeature = (state) => state.count;
+ 
+export const selectCounter = createSelector(
+  selectFeature,
+  (state) => state.counter
+);
